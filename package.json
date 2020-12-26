@@ -1,0 +1,14 @@
+{
+  "name": "bt-ecommerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/server"
+  },
+  "author": "Anand",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
