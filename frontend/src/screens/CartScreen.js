@@ -14,11 +14,11 @@ import { addToCart, removeFromCart } from '../actions/cartActions';
 import Message from '../components/Message';
 
 const CartScreen = ({ match, location, history }) => {
+  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const productId = match.params.id;
   const qty = location.search ? Number(location.search.split('=')[1]) : 1;
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  
   const { cartItems } = cart;
   useEffect(() => {
     if (productId) {
@@ -63,11 +63,17 @@ const CartScreen = ({ match, location, history }) => {
                         );
                       }}
                     >
-                      {[...Array(item.countInStock).keys()].map((x) => (
-                        <option key={x + 1} value={x + 1}>
-                          {x + 1}
-                        </option>
-                      ))}
+                      {item.countInStock > 10
+                        ? [...array].map((x) => (
+                            <option key={x} value={x}>
+                              {x}
+                            </option>
+                          ))
+                        : [...Array(item.countInStock).keys()].map((x) => (
+                            <option key={x + 1} value={x + 1}>
+                              {x + 1}
+                            </option>
+                          ))}
                     </Form.Control>
                   </Col>
                   <Col md={2}>
