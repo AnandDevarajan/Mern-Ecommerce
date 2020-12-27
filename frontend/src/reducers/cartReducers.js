@@ -10,7 +10,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
       if (existItem) {
         return {
           ...state,
-          cartItem: state.cartItems.map((x) =>
+          cartItems: state.cartItems.map((x) =>
             x.product === existItem.product ? item : x
           ),
         };
@@ -20,6 +20,11 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
           cartItems: [...state.cartItems, item],
         };
       }
+    case CART_REMOVE_ITEM:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter((x) => x.product !== action.payload),
+      };
     default:
       return state;
   }

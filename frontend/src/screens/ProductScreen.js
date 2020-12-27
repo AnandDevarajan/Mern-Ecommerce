@@ -12,21 +12,28 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import Rating from '../components/Rating';
 import { listProductDetaills } from '../actions/productActions';
+import { addToCart } from '../actions/cartActions';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
 const ProductScreen = ({ history, match }) => {
-  const [qty, setQty] = useState(0);
+  const productId = match.params.id;
+  const [qty, setQty] = useState(1);
 
   const dispatch = useDispatch();
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
   useEffect(() => {
-    dispatch(listProductDetaills(match.params.id));
-  }, [dispatch]);
+    dispatch(listProductDetaills(productId));
+  }, [dispatch, productId, qty]);
 
-  const addToCart = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`);
+  // const addToCart = () => {
+  //   history.push(`/cart/${match.params.id}?qty=${qty}`);
+  // };
+
+  const addToCartHandler = (e) => {
+    dispatch(addToCart(product._id, qty));
+    history.push('/cart');
   };
 
   return (
@@ -102,7 +109,7 @@ const ProductScreen = ({ history, match }) => {
                 )}
                 <ListGroup.Item>
                   <Button
-                    onClick={addToCart}
+                    onClick={addToCartHandler}
                     className='btn-block'
                     type='button'
                     disabled={product.countInStock === 0}
