@@ -49,7 +49,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
 });
 
 exports.getUserProfile = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.user.id);
 
   if (user) {
     res.json({
@@ -64,15 +64,23 @@ exports.getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-exports.getUserProfile = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
-
+exports.updateUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user.id);
+  console.log(user);
   if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+
+    const updatedUser = await user.save();
     res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      token: generateToken(updatedUser._id),
     });
   } else {
     res.status(404);
