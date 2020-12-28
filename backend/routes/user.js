@@ -5,15 +5,10 @@ const {
   getUserProfile,
   registerUser,
 } = require('../controllers/user');
-const {
-  signInValidation,
-  signUpValidation,
-  isRequestValidated,
-} = require('../validators/auth');
 const { verifyAuth } = require('../middleware/auth');
 
-router.post('/', signUpValidation, isRequestValidated, registerUser);
-router.post('/login', signInValidation, isRequestValidated, authUser);
+router.post('/', registerUser);
+router.post('/login', authUser);
 router.route('/profile').get(verifyAuth, getUserProfile);
 
 module.exports = router;

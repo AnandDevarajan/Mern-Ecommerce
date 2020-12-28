@@ -40,13 +40,13 @@ export const listProductDetaills = (id) => async (dispatch) => {
       type: PRODUCT_DETAILS_SUCCESS,
       payload: data,
     });
-  } catch (error) {
+  } catch (err) {
     dispatch({
       type: PRODUCT_DETAILS_FAIL,
       payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message,
     });
   }
 };
