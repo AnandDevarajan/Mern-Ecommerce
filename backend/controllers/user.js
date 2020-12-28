@@ -4,7 +4,7 @@ const { generateToken } = require('../utils/auth');
 exports.authUser = (req, res) => {
   const { email, password } = req.body;
   User.findOne({ email }).exec((err, user) => {
-    if (err) return res.status(400).json({ err });
+    if (err) return res.status(401).json({ error: 'Enter all details' });
     if (user && user.authenticate(password)) {
       res.json({
         _id: user._id,
