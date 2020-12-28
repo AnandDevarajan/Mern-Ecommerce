@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    password: {
+    encry_password: {
       type: String,
       required: true,
     },
@@ -24,13 +24,13 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// userSchema.virtual('password').set(function (password) {
-//   this.encry_password = bcrypt.hashSync(password, 10);
-// });
+userSchema.virtual('password').set(function (password) {
+  this.encry_password = bcrypt.hashSync(password, 10);
+});
 
 userSchema.methods = {
-  authenticate: function (epassword) {
-    return bcrypt.compareSync(epassword, this.password);
+  authenticate: function (password) {
+    return bcrypt.compareSync(password, this.encry_password);
   },
 };
 

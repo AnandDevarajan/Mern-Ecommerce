@@ -21,6 +21,26 @@ exports.authUser = (req, res) => {
   });
 };
 
+exports.registerUser = (req, res) => {
+  const { name, email, password } = req.body;
+  User.findOne({ email }).exec((err, user) => {
+    if (user) return res.status(400).json({ message: 'User already exists' });
+  });
+  const user = new User({
+    name,
+    email,
+    password,
+  });
+
+  user.save((err, data) => {
+    if (err) return res.status(400).json({ message: 'Unable to create user' });
+    if (data)
+      return res.status(201).json({
+        message: 'User created successfully',
+      });
+  });
+};
+
 exports.getUserProfile = (req, res) => {
   User.findById(req.user.id).exec((err, user) => {
     if (err)
