@@ -25,7 +25,7 @@ const RegisterScreen = ({ location, history }) => {
     if (userInfo) {
       history.push(redirect);
     }
-  }, [history, userInfo, , redirect]);
+  }, [history, userInfo,redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -36,7 +36,8 @@ const RegisterScreen = ({ location, history }) => {
       confirmPassword === ''
     ) {
       setMessage('Enter all the details');
-    } else if (password !== confirmPassword) {
+    }
+    else if (password !== confirmPassword) {
       setMessage('');
       setMessage('Passwords do not match');
     } else {
