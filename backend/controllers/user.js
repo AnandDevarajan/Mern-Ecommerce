@@ -1,5 +1,5 @@
 const User = require('../models/User');
-
+const { generateToken } = require('../utils/auth');
 exports.authUser = (req, res) => {
   const { email, password } = req.body;
 
@@ -11,6 +11,7 @@ exports.authUser = (req, res) => {
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
+        token: generateToken(user._id),
       });
     } else {
       res.status(401).json({
