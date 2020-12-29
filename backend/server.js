@@ -3,6 +3,7 @@ require('dotenv').config();
 const connectDB = require('./config/db');
 const productRoutes = require('./routes/product');
 const userRoutes = require('./routes/user');
+const orderRoutes = require('./routes/order');
 const cors = require('cors');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 const app = express();
@@ -16,6 +17,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
 app.use(notFound);
 app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
