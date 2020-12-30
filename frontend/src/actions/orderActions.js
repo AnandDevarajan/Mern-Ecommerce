@@ -12,6 +12,7 @@ import {
   ORDER_PAY_REQUEST,
   ORDER_PAY_SUCCESS,
 } from '../constants/orderConstants';
+import { CART_ITEMS_RESET } from '../constants/cartConstants';
 import { logout } from './userActions';
 import axios from 'axios';
 
@@ -36,6 +37,10 @@ export const createOrder = (order) => async (dispatch, getState) => {
 
     dispatch({
       type: ORDER_CREATE_SUCCESS,
+      payload: data,
+    });
+    dispatch({
+      type: CART_ITEMS_RESET,
       payload: data,
     });
   } catch (error) {
