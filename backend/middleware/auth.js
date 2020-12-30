@@ -10,7 +10,7 @@ exports.verifyAuth = asyncHandler((req, res, next) => {
       next();
     } catch (error) {
       res.status(401);
-      throw new Error('Not Authorized');
+      throw new Error('Not authorized, token failed');
     }
   }
 });
