@@ -5,9 +5,11 @@ const {
   getUserProfile,
   registerUser,
   updateUserProfile,
+  getUsers,
 } = require('../controllers/user');
-const { verifyAuth } = require('../middleware/auth');
+const { verifyAuth, admin } = require('../middleware/auth');
 
+router.get('/', verifyAuth, admin, getUsers);
 router.post('/', registerUser);
 router.post('/login', authUser);
 router
