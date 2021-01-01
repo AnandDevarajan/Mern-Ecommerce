@@ -7,6 +7,8 @@ const {
   updateUserProfile,
   getUsers,
   deleteUser,
+  getUserById,
+  updateUser,
 } = require('../controllers/user');
 const { verifyAuth, admin } = require('../middleware/auth');
 
@@ -17,5 +19,10 @@ router
   .route('/profile')
   .get(verifyAuth, getUserProfile)
   .put(verifyAuth, updateUserProfile);
-router.delete('/:id', verifyAuth, admin, deleteUser);
+router
+  .route('/:id')
+  .get(verifyAuth, admin, getUserById)
+  .put(verifyAuth, admin, updateUser)
+  .delete(verifyAuth, admin, deleteUser);
+
 module.exports = router;
