@@ -2,6 +2,7 @@ const User = require('../models/User');
 const asyncHandler = require('express-async-handler');
 const { generateToken } = require('../utils/auth');
 
+//Sign in a user
 exports.authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
@@ -18,7 +19,7 @@ exports.authUser = asyncHandler(async (req, res) => {
     throw new Error('Invalid email or password');
   }
 });
-
+//Sign up a user
 exports.registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -48,6 +49,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
   }
 });
 
+//Get the user profile
 exports.getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user.id);
 
@@ -64,6 +66,7 @@ exports.getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
+//Update user profile
 exports.updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user.id);
   console.log(user);
@@ -92,4 +95,16 @@ exports.updateUserProfile = asyncHandler(async (req, res) => {
 exports.getUsers = asyncHandler(async (req, res) => {
   const users = await User.find({});
   res.json(users);
+});
+
+//delete a user
+exports.deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (user) {
+    await user.remove();
+    res.json({ message: 'User Removed' });
+  } else {
+    res.status(404);
+    throw new Error('User Not Found');
+  }
 });

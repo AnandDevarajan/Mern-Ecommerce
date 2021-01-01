@@ -10,7 +10,7 @@ exports.verifyAuth = asyncHandler(async (req, res, next) => {
       next();
     } catch (error) {
       res.status(401);
-      throw new Error('Not authorized, token failed');
+      throw new Error('Not authorized');
     }
   }
 });
@@ -20,6 +20,6 @@ exports.admin = (req, res, next) => {
     next();
   } else {
     res.status(401);
-    throw new Error('Not authorized as an admin');
+    throw new Error('ACCESS DENIED');
   }
 };

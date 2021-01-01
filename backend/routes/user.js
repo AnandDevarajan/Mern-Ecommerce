@@ -6,6 +6,7 @@ const {
   registerUser,
   updateUserProfile,
   getUsers,
+  deleteUser,
 } = require('../controllers/user');
 const { verifyAuth, admin } = require('../middleware/auth');
 
@@ -16,5 +17,5 @@ router
   .route('/profile')
   .get(verifyAuth, getUserProfile)
   .put(verifyAuth, updateUserProfile);
-
+router.delete('/:id', verifyAuth, admin, deleteUser);
 module.exports = router;

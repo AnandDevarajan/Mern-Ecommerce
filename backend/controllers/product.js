@@ -1,6 +1,7 @@
 const Product = require('../models/Product');
 const asyncHandler = require('express-async-handler');
 
+//GET all products
 exports.getAllProducts = asyncHandler(async (req, res) => {
   const products = await Product.find({});
   if (products) {
@@ -11,6 +12,7 @@ exports.getAllProducts = asyncHandler(async (req, res) => {
   }
 });
 
+//GET a product
 exports.getProductById = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {
