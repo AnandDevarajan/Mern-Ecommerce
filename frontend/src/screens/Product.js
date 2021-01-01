@@ -15,7 +15,7 @@ import { listProductDetaills } from '../actions/productActions';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
-const ProductScreen = ({ history, match }) => {
+const Product = ({ history, match }) => {
   const productId = match.params.id;
   const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const [qty, setQty] = useState(1);
@@ -134,4 +134,4 @@ const ProductScreen = ({ history, match }) => {
   );
 };
 
-export default ProductScreen;
+export default Product;

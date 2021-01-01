@@ -2,37 +2,39 @@ import { Container } from 'react-bootstrap';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import HomeScreen from './screens/HomeScreen';
-import ProductScreen from './screens/ProductScreen';
-import CartScreen from './screens/CartScreen';
-import LoginScreen from './screens/LoginScreen';
-import RegisterScreen from './screens/RegisterScreen';
-import ProfileScreen from './screens/ProfileScreen';
-import ShippingScreen from './screens/ShippingScreen';
-import PaymentScreen from './screens/PaymentScreen';
-import PlaceOrderScreen from './screens/PlaceOrderScreen';
-import OrderScreen from './screens/OrderScreen';
-import UserListScreen from './screens/UserListScreen';
-import UserEditScreen from './screens/UserEditScreen';
+import Home from './screens/Home';
+import Product from './screens/Product';
+import Cart from './screens/Cart';
+import Login from './screens/Login';
+import Register from './screens/Register';
+import Profile from './screens/Profile';
+import Shipping from './screens/Shipping';
+import Payment from './screens/Payment';
+import PlaceOrder from './screens/PlaceOrder';
+import Order from './screens/Order';
+import UserList from './screens/UserList';
+import UserEdit from './screens/UserEdit';
+import ProductList from './screens/ProductList';
 const App = () => {
   return (
     <Router>
       <Header />
       <main className='py-3'>
         <Container>
-          <Route exact path='/' component={HomeScreen} />
+          <Route exact path='/' component={Home} />
 
-          <Route path='/product/:id' component={ProductScreen} />
-          <Route path='/login' component={LoginScreen} />
-          <Route path='/register' component={RegisterScreen} />
-          <Route path='/profile' component={ProfileScreen} />
-          <Route path='/shipping' component={ShippingScreen} />
-          <Route path='/payment' component={PaymentScreen} />
-          <Route path='/placeorder' component={PlaceOrderScreen} />
-          <Route path='/admin/userlist' component={UserListScreen} />
-          <Route path='/admin/user/:id' component={UserEditScreen} />
-          <Route path='/order/:id' component={OrderScreen} />
-          <Route path='/cart/:id?' component={CartScreen} />
+          <Route path='/product/:id' component={Product} />
+          <Route path='/login' component={Login} />
+          <Route path='/register' component={Register} />
+          <Route path='/profile' component={Profile} />
+          <Route path='/shipping' component={Shipping} />
+          <Route path='/payment' component={Payment} />
+          <Route path='/placeorder' component={PlaceOrder} />
+          <Route path='/admin/userlist' component={UserList} />
+          <Route path='/admin/productlist' component={ProductList} />
+          <Route path='/admin/user/:id' component={UserEdit} />
+          <Route path='/order/:id' component={Order} />
+          <Route path='/cart/:id?' component={Cart} />
         </Container>
       </main>
       <Footer />

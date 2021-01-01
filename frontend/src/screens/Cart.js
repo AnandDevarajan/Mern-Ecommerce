@@ -13,7 +13,7 @@ import {
 import { addToCart, removeFromCart } from '../actions/cartActions';
 import Message from '../components/Message';
 
-const CartScreen = ({ match, location, history }) => {
+const Cart = ({ match, location, history }) => {
   const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const productId = match.params.id;
   const qty = location.search ? Number(location.search.split('=')[1]) : 1;
@@ -122,4 +122,4 @@ const CartScreen = ({ match, location, history }) => {
   );
 };
 
-export default CartScreen;
+export default Cart;

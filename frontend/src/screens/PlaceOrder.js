@@ -6,7 +6,7 @@ import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { createOrder } from '../actions/orderActions';
 
-const PlaceOrderScreen = ({ history }) => {
+const PlaceOrder = ({ history }) => {
   const dispatch = useDispatch();
 
   const addDecimals = (num) => {
@@ -163,4 +163,4 @@ const PlaceOrderScreen = ({ history }) => {
   );
 };
 
-export default PlaceOrderScreen;
+export default PlaceOrder;
