@@ -31,7 +31,9 @@ const ProductList = ({ history }) => {
   }, [dispatch, history, userInfo, successDelete]);
 
   const deleteHandler = (id) => {
-    dispatch(deleteProduct(id));
+    if (window.confirm('Do you want to delete this user?')) {
+      dispatch(productDelete(id));
+    }
   };
 
   const createProductHandler = (product) => {};
