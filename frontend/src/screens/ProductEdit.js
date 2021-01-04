@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
-import { listProductDetaills } from '../actions/productActions';
+import { listProductDetaills, updateProduct } from '../actions/productActions';
+import { PRODUCT_UPDATE_RESET } from '../constants/productsConstants';
 
 const ProductEdit = ({ match, history }) => {
   const productId = match.params.id;
@@ -22,28 +23,56 @@ const ProductEdit = ({ match, history }) => {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
+  const productUpdate = useSelector((state) => state.productUpdate);
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = productUpdate;
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
-      if (!product.name || product._id !== productId) {
-        dispatch(listProductDetaills(productId));
-      } else {
-        setName(product.name);
-        setPrice(product.price);
-        setImage(product.image);
-        setBrand(product.brand);
-        setCategory(product.category);
-        setCountInStock(product.countInStock);
-        setDescription(product.description);
-      }
+    if (successUpdate) {
+      dispatch({
+        type: PRODUCT_UPDATE_RESET,
+      });
+      history.push('/admin/productlist');
     } else {
-      history.push('/login');
+      if (userInfo && userInfo.isAdmin) {
+        if (!product.name || product._id !== productId) {
+          dispatch(listProductDetaills(productId));
+        } else {
+          setName(product.name);
+          setPrice(product.price);
+          setImage(product.image);
+          setBrand(product.brand);
+          setCategory(product.category);
+          setCountInStock(product.countInStock);
+          setDescription(product.description);
+        }
+      } else {
+        history.push('/login');
+      }
     }
-  }, [productId, dispatch, product, history, userInfo]);
+  }, [productId, dispatch, product, history, userInfo, successUpdate]);
 
-  const submitHandler = (e) => {};
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(
+      updateProduct({
+        _id: productId,
+        name,
+        price,
+        image,
+        brand,
+        category,
+        description,
+        countInStock,
+      })
+    );
+  };
 
   return (
     <>
@@ -53,6 +82,8 @@ const ProductEdit = ({ match, history }) => {
 
       <FormContainer>
         <h1>EDIT PRODUCT</h1>
+        {loadingUpdate && <Loader />}
+        {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (

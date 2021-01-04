@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
+import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
@@ -10,7 +10,7 @@ import { PayPalButton } from 'react-paypal-button-v2';
 import { getOrderDetails, payOrder } from '../actions/orderActions';
 import { ORDER_PAY_RESET } from '../constants/orderConstants';
 
-const Order= ({ match }) => {
+const Order = ({ match }) => {
   const orderId = match.params.id;
 
   const [sdkReady, setSdkReady] = useState(false);
@@ -57,6 +57,9 @@ const Order= ({ match }) => {
     <Message variant='danger'>{error}</Message>
   ) : (
     <>
+      <Link to='/profile'>
+        <Button>View Orders</Button>
+      </Link>
       <h1>Order {order._id}</h1>{' '}
       <Row>
         <Col md={8}>

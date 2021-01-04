@@ -57,7 +57,7 @@ const Shipping = ({ history }) => {
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId='country'>
-          <Form.Label>country</Form.Label>
+          <Form.Label>state</Form.Label>
           <Form.Control
             type='text'
             placeholder='Enter  country'

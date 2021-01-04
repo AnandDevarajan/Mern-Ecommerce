@@ -5,8 +5,13 @@ import Rating from './Rating';
 const Product = ({ product }) => {
   return (
     <Card
-      className='my-3 p-3 rounded'
-      style={{ minHeight: '430px', minWidth: '260px' }}
+      className='p-3 rounded'
+      style={{
+        flexWrap: 'wrap',
+        flex: 'initial',
+        width: '100%',
+        height: '100%',
+      }}
     >
       <Link to={`/product/${product._id}`}>
         <Card.Img src={product.image} variant='top' />
@@ -24,7 +29,7 @@ const Product = ({ product }) => {
             text={`${product.numReviews} reviews`}
           />
         </Card.Text>
-        <Card.Text as='h3'>₹ {product.price}</Card.Text>
+        <Card.Text as='h3'>₹{product.price}</Card.Text>
       </Card.Body>
     </Card>
   );
