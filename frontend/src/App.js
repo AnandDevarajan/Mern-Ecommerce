@@ -11,7 +11,7 @@ import Profile from './screens/Profile';
 import Shipping from './screens/Shipping';
 import Payment from './screens/Payment';
 import PlaceOrder from './screens/PlaceOrder';
-import Orde r from './screens/Order';
+import Order from './screens/Order';
 import UserList from './screens/UserList';
 import UserEdit from './screens/UserEdit';
 import ProductList from './screens/ProductList';
