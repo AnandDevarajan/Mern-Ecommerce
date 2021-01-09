@@ -76,3 +76,14 @@ exports.getMyOrders = asyncHandler(async (req, res) => {
     throw new Error('No orders found');
   }
 });
+
+//GET all prders
+exports.getOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({}).populate('user', 'id name');
+  if (orders) {
+    res.json(orders);
+  } else {
+    res.status(404);
+    throw new Error('No orders found');
+  }
+});
