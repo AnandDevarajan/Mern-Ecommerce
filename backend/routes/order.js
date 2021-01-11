@@ -15,6 +15,6 @@ router.get('/', verifyAuth, admin, getOrders);
 router.get('/myorders', verifyAuth, getMyOrders);
 router.get('/:id', verifyAuth, getOrderById);
 router.put('/:id/pay', verifyAuth, updateOrderToPaid);
-router.put('/:id/deliver', verifyAuth, admin, updateOrderToPaid);
+router.put('/:id/deliver', verifyAuth, admin, updateOrderToDelivered);
 
 module.exports = router;
