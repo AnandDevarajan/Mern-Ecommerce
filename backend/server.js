@@ -6,11 +6,15 @@ const productRoutes = require('./routes/product');
 const userRoutes = require('./routes/user');
 const orderRoutes = require('./routes/order');
 const uploadRoutes = require('./routes/upload');
+const morgan = require('morgan');
 const cors = require('cors');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 const app = express();
 connectDB();
 
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 app.use(cors());
 app.use(express.json());
 app.get('/', (req, res) => {
