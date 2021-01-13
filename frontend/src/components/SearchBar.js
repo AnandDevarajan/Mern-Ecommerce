@@ -17,7 +17,7 @@ const SearchBar = ({ history }) => {
       <Form.Control
         type='text'
         name='q'
-        onChange={(e) => keyword(e.target.value)}
+        onChange={(e) => setKeyword(e.target.value)}
         placeholder='search products'
         className='mr-sm-2 ml-sm-5'
       ></Form.Control>
