@@ -3,6 +3,8 @@ const asyncHandler = require('express-async-handler');
 
 //GET all products
 exports.getAllProducts = asyncHandler(async (req, res) => {
+  const pageSize = 4;
+  const page = Number(req.query.pageNumber) || 1;
   const keyword = req.query.keyword
     ? {
         name: {
@@ -11,9 +13,12 @@ exports.getAllProducts = asyncHandler(async (req, res) => {
         },
       }
     : {};
-  const products = await Product.find({ ...keyword });
+  const count = await Product.countDocuments({ ...keyword });
+  const products = await Product.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
   if (products) {
-    res.json(products);
+    res.json({ products, page, pages: Math.ceil(count / pageSize) });
   } else {
     res.status(400);
     throw new Error('No products found');

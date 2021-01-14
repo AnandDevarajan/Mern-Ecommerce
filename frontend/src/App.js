@@ -24,7 +24,13 @@ const App = () => {
       <main className='py-3'>
         <Container>
           <Route exact path='/' component={Home} />
+          <Route exact path='/page/:pageNumber' component={Home} />
           <Route exact path='/search/:keyword' component={Home} />
+          <Route
+            exact
+            path='/search/:keyword/page/:pageNumber'
+            component={Home}
+          />
 
           <Route path='/product/:id' component={Product} />
           <Route path='/login' component={Login} />
