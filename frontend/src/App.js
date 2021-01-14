@@ -40,7 +40,12 @@ const App = () => {
           <Route path='/payment' component={Payment} />
           <Route path='/placeorder' component={PlaceOrder} />
           <Route path='/admin/userlist' component={UserList} />
-          <Route path='/admin/productlist' component={ProductList} />
+          <Route path='/admin/productlist' component={ProductList} exact />
+          <Route
+            exact
+            path='/admin/productlist/:pageNumber'
+            component={ProductList}
+          />
           <Route path='/admin/orderlist' component={OrderList} />
           <Route path='/admin/user/:id' component={UserEdit} />
           <Route path='/admin/product/:id' component={ProductEdit} />
