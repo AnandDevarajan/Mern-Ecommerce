@@ -60,7 +60,7 @@ const Shipping = ({ history }) => {
           <Form.Label>state</Form.Label>
           <Form.Control
             type='text'
-            placeholder='Enter  country'
+            placeholder='Enter  State'
             value={country}
             required
             onChange={(e) => setCountry(e.target.value)}
