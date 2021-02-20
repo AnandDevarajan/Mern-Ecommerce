@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 import Loader from '../components/Loader';
 import Paginate from '../components/Paginate';
+import ProductCarousel from '../components/ProductCarousel';
 
 const Home = ({ match }) => {
   const keyword = match.params.keyword;
@@ -25,6 +26,7 @@ const Home = ({ match }) => {
         <h1 className='text-danger'>No Products Found</h1>
       ) : (
         <>
+        {!keyword && <ProductCarousel/>}
           <h1>Latest Products</h1>
           <Row>
             {products.map((product) => (
