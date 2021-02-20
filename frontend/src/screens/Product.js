@@ -14,6 +14,7 @@ import Rating from '../components/Rating';
 import { listProductDetaills, reviewProduct } from '../actions/productActions';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import Meta from '../components/Meta';
 import { PRODUCT_REVIEW_RESET } from '../constants/productsConstants';
 
 const Product = ({ history, match }) => {
@@ -72,6 +73,7 @@ const Product = ({ history, match }) => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
+          <Meta title={product.name} />
           <Row>
             <Col md={6}>
               <Image src={product.image} alt={product.name} fluid />

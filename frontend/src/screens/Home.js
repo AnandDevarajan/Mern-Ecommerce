@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { Row, Col } from 'react-bootstrap';
 import Product from '../components/Product';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
+import Meta from '../components/Meta';
 import Loader from '../components/Loader';
 import Paginate from '../components/Paginate';
 import ProductCarousel from '../components/ProductCarousel';
@@ -20,13 +23,21 @@ const Home = ({ match }) => {
 
   return (
     <>
+      <Meta />
+
       {loading ? (
         <Loader />
       ) : products.length === 0 ? (
         <h1 className='text-danger'>No Products Found</h1>
       ) : (
         <>
-        {!keyword && <ProductCarousel/>}
+          {!keyword ? (
+            <ProductCarousel />
+          ) : (
+            <Link to='/' className='btn btn-light'>
+              Go Back
+            </Link>
+          )}
           <h1>Latest Products</h1>
           <Row>
             {products.map((product) => (
